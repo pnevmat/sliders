@@ -13,12 +13,11 @@
 .pinContainer {
   position: absolute;
   top: 0;
-  /* remove left from here and paste it to js */
-  left: 0;
 }
 
 .inputRange {
   width: 100%;
+  margin: 0;
 }
 
 .inputRange::-webkit-slider-runnable-track {

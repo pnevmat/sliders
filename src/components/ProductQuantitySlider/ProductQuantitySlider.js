@@ -1,28 +1,68 @@
-import React, {useState} from 'react';
-import {ReactComponent as Pin} from '../../images/svg/pin.svg';
+import React, {useState, useEffect, useRef} from 'react';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import s from './ProductQuantitySlider.module.css';
 
-export default function ProductQuantitySlider() {
-  const [value, setValue] = useState(0);
+export default function ProductQuantitySlider({
+  pin,
+  value,
+  minValue,
+  maxValue,
+  step,
+  setValue,
+}) {
+  const [pinStep, sePinStep] = useState(value);
+  const [left, setLeft] = useState(value);
+
+  const mainBlockRef = useRef(null);
+  const pinContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (mainBlockRef.current) {
+      const mainBlockWidth = mainBlockRef.current.getBoundingClientRect().width;
+
+      const actualMainBlockWidth = Math.ceil(mainBlockWidth);
+
+      if (actualMainBlockWidth !== 0) {
+        const pinStep = actualMainBlockWidth / maxValue;
+        console.log('Pin step: ', pinStep);
+        sePinStep(pinStep);
+      }
+    }
+  }, [maxValue]);
+
+  const setValueHandler = (newValue) => {
+    if (newValue !== value && newValue !== minValue) {
+      setLeft((prevLeft) => {
+        if (value < newValue) return prevLeft + pinStep;
+        if (value > newValue) return prevLeft - pinStep;
+      });
+    }
+
+    if (newValue === minValue) setLeft(minValue);
+    setValue(newValue);
+  };
+
   console.log('Input range value: ', value);
   return (
     <>
-      <div className={s.container}>
-        <div className={s.pinContainer}>
-          <Pin />
+      <div ref={mainBlockRef} className={s.container}>
+        <div
+          ref={pinContainerRef}
+          className={s.pinContainer}
+          style={{left: `${left}px`}}>
+          {pin}
         </div>
         <input
           className={s.inputRange}
           type="range"
           value={value}
-          min="0"
-          max="100"
-          step="1"
-          onChange={(e) => setValue(e.target.value)}
+          min={minValue}
+          max={maxValue}
+          step={step}
+          onChange={(e) => setValueHandler(e.target.value)}
         />
       </div>
     </>

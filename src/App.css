@@ -1,0 +1,15 @@
+.lineContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 2px;
+  padding-left: 13px;
+  padding-right: 13px;
+  margin-bottom: 12px;
+}
+
+.sliderWrapper {
+  position: relative;
+  top: 12px;
+  left: 0;
+}
