@@ -13,6 +13,9 @@
 .pinContainer {
   position: absolute;
   top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .inputRange {
@@ -21,7 +24,7 @@
 }
 
 .inputRange::-webkit-slider-runnable-track {
-  height: 27px;
+  height: 100%;
   cursor: grab;
 }
 

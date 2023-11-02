@@ -12,7 +12,9 @@ export default function ProductQuantitySlider({
   maxValue,
   step,
   setValue,
+  style,
 }) {
+  // Todo: try when step will be more than 1
   const [pinStep, sePinStep] = useState(value);
   const [pinWidth, setPinWidth] = useState(0);
   const [left, setLeft] = useState(value);
@@ -21,7 +23,7 @@ export default function ProductQuantitySlider({
   const pinContainerRef = useRef(null);
 
   useEffect(() => {
-    if (mainBlockRef.current) {
+    if (mainBlockRef.current && pinContainerRef.current) {
       const mainBlockWidth = mainBlockRef.current.getBoundingClientRect().width;
       const pinContainerWidth =
         pinContainerRef.current.getBoundingClientRect().width;
@@ -30,7 +32,7 @@ export default function ProductQuantitySlider({
       const actualPinContainerWidth = Math.ceil(pinContainerWidth);
 
       if (actualMainBlockWidth !== 0) {
-        const pinStep = (actualMainBlockWidth * step) / maxValue;
+        const pinStep = actualMainBlockWidth / maxValue;
         console.log('Pin step: ', pinStep);
         sePinStep(pinStep);
         setPinWidth(actualPinContainerWidth);
@@ -39,15 +41,22 @@ export default function ProductQuantitySlider({
   }, [maxValue, step]);
 
   useEffect(() => {
-    if (value <= minValue || value === '2') setLeft(minValue);
-    if (value >= maxValue) setLeft(pinStep * maxValue - pinWidth);
-  }, [value, minValue, maxValue, pinStep, pinWidth]);
+    if (value <= minValue || value === `${minValue + step}`) {
+      setLeft(-pinWidth / 2 + 2);
+      setValue(minValue);
+    }
+
+    if (value >= maxValue || value >= `${maxValue - step}`) {
+      setLeft(pinStep * maxValue - pinWidth / 2 - 2);
+      setValue(maxValue);
+    }
+  }, [value, minValue, maxValue, step, pinStep, pinWidth, setValue]);
 
   const setValueHandler = (newValue) => {
     if (newValue !== value && newValue > minValue) {
       setLeft((prevLeft) => {
-        if (value < newValue) return prevLeft + pinStep;
-        if (value > newValue) return prevLeft - pinStep;
+        if (value < newValue || value > newValue)
+          return newValue * pinStep - pinWidth / 2;
       });
       setValue(newValue);
     }
@@ -65,6 +74,7 @@ export default function ProductQuantitySlider({
         </div>
         <input
           className={s.inputRange}
+          style={style ? style : {}}
           type="range"
           value={value}
           min={minValue}

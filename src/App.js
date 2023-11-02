@@ -10,7 +10,8 @@ function App() {
 
   const minQuantity = 1;
   const maxQuantity = 100;
-  const step = 1;
+  const step = 2;
+  const style = {height: '27px'};
   return (
     <div
       style={{
@@ -20,7 +21,13 @@ function App() {
         marginRight: 'auto',
         marginLeft: 'auto',
       }}>
-      <div style={{border: '1px solid gray', borderRadius: '5px'}}>
+      <div
+        style={{
+          paddingRight: '30px',
+          paddingLeft: '30px',
+          border: '1px solid gray',
+          borderRadius: '5px',
+        }}>
         <div>
           <div className="sliderWrapper">
             <ProductQuantitySlider
@@ -30,6 +37,7 @@ function App() {
               maxValue={maxQuantity}
               step={step}
               setValue={setQuantity}
+              style={style}
             />
           </div>
 
