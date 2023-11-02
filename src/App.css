@@ -1,15 +1,38 @@
-.lineContainer {
-  position: relative;
+.appContainer {
   display: flex;
-  align-items: center;
-  padding-right: 2px;
-  /* padding-left: 13px;
-  padding-right: 13px; */
-  margin-bottom: 12px;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  max-width: 525px;
+  padding-top: 100px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.sliderContainer {
+  padding-right: 30px;
+  padding-left: 30px;
+  border: 1px solid gray;
+  border-radius: 5px;
 }
 
 .sliderWrapper {
   position: relative;
   top: 12px;
   left: 0;
+}
+
+.lineContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 2px;
+  margin-bottom: 12px;
+}
+
+.swiperSliderContainer {
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  height: 262px;
 }
