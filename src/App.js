@@ -15,7 +15,7 @@ function App() {
 
   const minQuantity = 1;
   const maxQuantity = 100;
-  const step = 2;
+  const step = 1;
   const style = {height: '27px'};
 
   const sliderImages = [

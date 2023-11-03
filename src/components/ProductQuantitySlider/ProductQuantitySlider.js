@@ -14,7 +14,7 @@ export default function ProductQuantitySlider({
   setValue,
   style,
 }) {
-  // Todo: try when step will be more than 1
+  // Todo: fix bug with unble to drag when hover on pin svg and continue to test when step is more than 1
   const [pinStep, sePinStep] = useState(value);
   const [pinWidth, setPinWidth] = useState(0);
   const [left, setLeft] = useState(value);
@@ -33,7 +33,7 @@ export default function ProductQuantitySlider({
 
       if (actualMainBlockWidth !== 0) {
         const pinStep = actualMainBlockWidth / maxValue;
-        console.log('Pin step: ', pinStep);
+        // console.log('Pin step: ', pinStep);
         sePinStep(pinStep);
         setPinWidth(actualPinContainerWidth);
       }
@@ -41,24 +41,37 @@ export default function ProductQuantitySlider({
   }, [maxValue, step]);
 
   useEffect(() => {
-    if (value <= minValue || value === `${minValue + step}`) {
+    // || value === `${minValue + step}`
+    if (value <= minValue) {
       setLeft(-pinWidth / 2 + 2);
       setValue(minValue);
     }
-
-    if (value >= maxValue || value >= `${maxValue - step}`) {
+    // || value >= `${maxValue - step}`
+    if (value >= maxValue) {
       setLeft(pinStep * maxValue - pinWidth / 2 - 2);
       setValue(maxValue);
     }
   }, [value, minValue, maxValue, step, pinStep, pinWidth, setValue]);
 
   const setValueHandler = (newValue) => {
+    // console.log('New value: ', newValue);
+    // console.log('Value in on change func: ', value);
     if (newValue !== value && newValue > minValue) {
       setLeft((prevLeft) => {
         if (value < newValue || value > newValue)
           return newValue * pinStep - pinWidth / 2;
       });
       setValue(newValue);
+    }
+
+    if (newValue === `${minValue}`) {
+      setLeft(-pinWidth / 2 + 2);
+      setValue(minValue);
+    }
+
+    if (step > 1 && Number(newValue) + step > maxValue) {
+      setLeft(pinStep * maxValue - pinWidth / 2 - 2);
+      setValue(maxValue);
     }
   };
 
