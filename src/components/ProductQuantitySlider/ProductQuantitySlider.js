@@ -14,7 +14,6 @@ export default function ProductQuantitySlider({
   setValue,
   style,
 }) {
-  // ToDo: test and fix calculation of products quantity with different step ammount
   const [pinWidth, setPinWidth] = useState(0);
   const [pinStep, sePinStep] = useState(minValue);
   const [sliderValue, setSliderValue] = useState(minValue);
@@ -55,8 +54,6 @@ export default function ProductQuantitySlider({
   }, [value, minValue, maxValue, step, pinStep, pinWidth, setValue]);
 
   const setValueHandler = (newValue) => {
-    // console.log('New value: ', newValue);
-    // console.log('Value in on change func: ', value);
     if (newValue !== value && newValue > minValue) {
       setLeft((prevLeft) => {
         if (value < newValue || value > newValue)
@@ -77,7 +74,6 @@ export default function ProductQuantitySlider({
     }
   };
 
-  // console.log('Input range value: ', value);
   return (
     <>
       <div ref={mainBlockRef} className={s.container}>
