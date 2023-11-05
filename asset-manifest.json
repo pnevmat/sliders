@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/sliders/static/css/main.ca897b75.css",
+    "main.js": "/sliders/static/js/main.b92e984b.js",
+    "static/media/road-1072821_1920.jpg": "/sliders/static/media/road-1072821_1920.8f553bcb57479c20e58f.jpg",
+    "static/media/flowers-276014_1920.jpg": "/sliders/static/media/flowers-276014_1920.e38b8bc491ca52031cd3.jpg",
+    "static/media/dandelion-445228_1920.jpg": "/sliders/static/media/dandelion-445228_1920.4fb83ad28b87c91c09de.jpg",
+    "static/media/ocean-3605547_1920.jpg": "/sliders/static/media/ocean-3605547_1920.71a96e88470bbed627e5.jpg",
+    "static/media/pin.svg": "/sliders/static/media/pin.68f6823ac72710b97d0f6d17e6fe4bb5.svg",
+    "index.html": "/sliders/index.html",
+    "main.ca897b75.css.map": "/sliders/static/css/main.ca897b75.css.map",
+    "main.b92e984b.js.map": "/sliders/static/js/main.b92e984b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ca897b75.css",
+    "static/js/main.b92e984b.js"
+  ]
+}
